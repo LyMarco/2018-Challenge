@@ -19,6 +19,7 @@ for i in range(1, 107):
     text = ""
     try:
         input_reader = open(path.join(d, file))
+
         for row in csv.reader(input_reader, delimiter='\t'):
             text += row[3] + " "
         input_reader.close()
