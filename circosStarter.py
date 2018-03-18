@@ -46,13 +46,24 @@ def calcArcCoords(chDF, starting, centered):
 def circoGeneDraw(chDF, genesDF, fName):
 
     dwg = svgwrite.Drawing(filename=fName)
-
+    addWordCloud(dwg, 1, RADIUS, 300, 300)
     #add title
     dwg.add(dwg.text("CHR 20 TADS", insert=CENTER, fill="black", text_anchor="middle"))
 
     #draw chromosome line
-    dwg.add(dwg.circle(CENTER, RADIUS, fill_opacity=0.0, stroke="black", stroke_width=1))
+    # dwg.add(dwg.circle(CENTER, RADIUS, fill_opacity=0.0, stroke="black", stroke_width=1))
 
+    #draw edge for each shared GOA
+    # GOAedges = dwg.add(dwg.g(id="GOAedges", stroke_width=0.05))
+
+    #for e in chEdges:
+    #    eStart = e[0]
+    #    eEnd = e[1]
+    #    eCol = e[2]
+        # GOAedges.add(dwg.line(eStart, eEnd, stroke=eCol))
+
+    #draw arcs for each gene
+    geneArcs = dwg.add(dwg.g(id="geneArcs", fill="white", stroke_width=5))
     from_ = "0 " + str(CENTER[0]) + " " + str(CENTER[1])
     to_ = "360 " + str(CENTER[0]) + " " + str(CENTER[1])
 
@@ -102,6 +113,11 @@ def circoGeneDraw(chDF, genesDF, fName):
         #         geneArcs.add(dwg.animate(attributeName="opacity", id="fills", from_="1", to="0",
         #                                         begin=start_time, end=end_time, dur="360s", repeatCount="indefinite"))
     dwg.save()
+
+
+def addWordCloud(dwg, n, r, x, y):
+    image = dwg.image("tad-cloud/tad" + str(n) + "-cloud.png", insert=(x-r,y-r), size = (2*r,2*r))
+    dwg.add(image)
 
 
 if __name__ == '__main__':

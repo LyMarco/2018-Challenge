@@ -10,16 +10,20 @@ Using a mask you can generate wordclouds in arbitrary shapes.
 from os import path
 from PIL import Image
 import numpy as np
+# import matplotlib
+# matplotlib.use('SVG')
+
 import matplotlib.pyplot as plt
 import csv
 
 from wordcloud import WordCloud, STOPWORDS
 
+
 d = path.dirname(__file__)
 
 # Read the whole text.
 # for i in range(1, 106):
-for i in range(1, 55):
+for i in range(1, 2):
     print(i)
     file = 'tad_GO/tad' + str(i) + '.txt'
     text = ""
@@ -50,13 +54,20 @@ for i in range(1, 55):
         # store to file
         wc.to_file(path.join(d, "tad-cloud/tad" + str(i) + "-cloud.png"))
 
-        # show
-        plt.imshow(wc, interpolation='bilinear')
-        plt.axis("off")
-        plt.figure()
-        plt.imshow(circle_mask, cmap=plt.get_cmap('gray'), interpolation='bilinear')
-        plt.axis("off")
-        plt.close()
+        # # show
+        # plt.imshow(wc, interpolation='bilinear')
+        # plt.axis("off")
+        # plt.figure()
+        # plt.imshow(circle_mask, cmap=plt.get_cmap('gray'), interpolation='bilinear')
+        # plt.axis("off")
+        # fig = plt.gcf()
+        # fig.set_size_inches(2, 2)
+        # plt.savefig(path.join(d, "tad-cloud/tad" + str(i) + "-cloud.svg"), dpi=600)
+        # plt.close()
         # plt.show()
-    except:
+    except IndexError:
         print(str(i) + " is an empty TAD")
+
+import svgwrite.image as im
+image = im.Image("tad-cloud/tad" + str(1) + "-cloud.png")
+print(str(image))
