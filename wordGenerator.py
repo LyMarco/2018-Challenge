@@ -21,7 +21,10 @@ for i in range(1, 107):
         input_reader = open(path.join(d, file))
 
         for row in csv.reader(input_reader, delimiter='\t'):
-            text += row[3] + " "
+            try:
+                text += row[3] + " "
+            except IndexError:
+                text += row[1] + " "
         input_reader.close()
 
         # read the mask image
