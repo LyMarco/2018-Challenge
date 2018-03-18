@@ -67,21 +67,21 @@ def makeEdgeList(chDF):
 def circoGeneDraw(chDF, chEdges, fName):
 
     dwg = svgwrite.Drawing(filename=fName)
-
+    addWordCloud(dwg, 1, RADIUS, 300, 300)
     #add title
     dwg.add(dwg.text("CHR 20", insert = CENTER, fill="black", text_anchor="middle"))
 
     #draw chromosome line
-    dwg.add(dwg.circle(CENTER, RADIUS, fill_opacity=0.0, stroke="black", stroke_width=1))
+    # dwg.add(dwg.circle(CENTER, RADIUS, fill_opacity=0.0, stroke="black", stroke_width=1))
 
     #draw edge for each shared GOA
-    GOAedges = dwg.add(dwg.g(id="GOAedges", stroke_width=0.05))
+    # GOAedges = dwg.add(dwg.g(id="GOAedges", stroke_width=0.05))
 
     for e in chEdges:
         eStart = e[0]
         eEnd = e[1]
         eCol = e[2]
-        GOAedges.add(dwg.line(eStart, eEnd, stroke=eCol))
+        # GOAedges.add(dwg.line(eStart, eEnd, stroke=eCol))
 
     #draw arcs for each gene
     geneArcs = dwg.add(dwg.g(id="geneArcs", fill="white", stroke_width=5))
@@ -94,6 +94,13 @@ def circoGeneDraw(chDF, chEdges, fName):
         geneArcs.add(dwg.path(d = gStart +  gArc + " 0 0,1 " + gEnd, stroke=chDF.loc[g].colour))
 
     dwg.save()
+
+
+import numpy
+
+def addWordCloud(dwg, n, r, x, y):
+    image = dwg.image("tad-cloud/tad" + str(n) + "-cloud.png", insert=(x-r,y-r), size = (2*r,2*r))
+    dwg.add(image)
 
 
 if __name__ == '__main__':
