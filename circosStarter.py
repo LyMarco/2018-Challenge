@@ -120,9 +120,9 @@ def circoGeneDraw(chDF, genesDF, fName):
 
             #Label the genes with gene symbols
             label = str(h)
-            theta_start = sub_genes_df.loc[h].thetaEnd*180/pi
-            text_x = (SUBRADIUS + 30 + len(label)) * cos(theta_start) + SUBCENTER[0]
-            text_y = (SUBRADIUS + 30 + len(label)) * sin(theta_start) + SUBCENTER[1]
+            theta = sub_genes_df.loc[h].end/sub_genes_df.loc[h].circle_len * 360
+            text_x = (SUBRADIUS + 30 + len(label)) * cos(theta) + SUBCENTER[0]
+            text_y = (SUBRADIUS + 30 + len(label)) * sin(theta) + SUBCENTER[1]
             label_text = dwg.add(dwg.text(label, insert=(text_x, text_y), fill="black",
                                    text_anchor="middle", opacity=0, stroke_width=2.5))
             label_text.add(dwg.animate(attributeName="opacity", id="fill", from_="1", to="0",
