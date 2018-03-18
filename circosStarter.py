@@ -127,11 +127,13 @@ def circoGeneDraw(chDF, genesDF, fName):
                                    text_anchor="middle", opacity=0, stroke_width=2.5))
             label_text.add(dwg.animate(attributeName="opacity", id="fill", from_="1", to="0",
                                 begin=start_time, end=end_time, dur="360s", repeatCount="indefinite"))
+
+            addWordCloud(dwg, 1, RADIUS, 500, 500, start_time, end_time)
     dwg.save()
 
 
 def addWordCloud(dwg, n, r, x, y, start_time, end_time):
-    image = dwg.image("tad-cloud/tad" + str(n) + "-cloud.png", insert=(x-r,y-r), size = (2*r,2*r))
+    image = dwg.image("tad-cloud/tad" + str(n) + "-cloud-transparent.png", insert=(x-r,y-r), size = (2*r,2*r))
     image.add(dwg.animate(attributeName="opacity", id="fills", from_="1", to="0",
                                begin=start_time, end=end_time, dur="360s", repeatCount="indefinite"))
     dwg.add(image)
