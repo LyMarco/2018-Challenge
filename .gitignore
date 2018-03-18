@@ -54,4 +54,11 @@ setUpCh.pyc
 .Rproj.user/9A1A2A86/sources/per/t/9F0E6CD9
 .Rproj.user/9A1A2A86/sources/per/t/80AEA2D4-contents
 *.svg
+<<<<<<< HEAD
 circosDraw.svg
+=======
+*.svg
+circosDraw.svg
+*.svg
+>>>>>>> 8b549b9f69aadea299e29cbe02daa6d749f34e0f
+*.svg
